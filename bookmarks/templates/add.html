@@ -5,15 +5,24 @@ Bookmarks - Welcome
 {% endblock %}
 
 {% block content %}
-  <form action="" method="post">
-    <p>
-      Enter bookmark here:
-      <input type="text" name="url">
-    </p>
-    <p>
-      <button type="submit">Submit</button>
-    </p>
-  </form>
+<h1>Add a new URL</h1>
+<form action="" method="post">
+  {{ form.hidden_tag() }}
+  <table>
+    <tr>
+      <td>Please enter your URL here:</td>
+      <td>{{ form.url(size = 50) }}</td>
+    </tr>
+    <tr>
+      <td>Optional description:</td>
+      <td>{{ form.description(size = 50) }}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button type="submit">Submit</button></td>
+    </tr>
+  </table>
+</form>
 {% endblock %}
 
 {% block sidebar %}
