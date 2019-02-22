@@ -154,26 +154,14 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-/* style for flashes */
+  /* style for flashes */
 .flashes ul {
-  margin: 0 0;
-  background: #FFD6A3;
-  color: #000;
-
-  list-style-type: none;
-  list-style: none;
-}
+    margin: 0 0;
+    background: #FFD6A3;
+    color: #000;
+    list-style-type: none;
+    list-style: none;
+  }
 
 article.flashes {
   margin-bottom: 1em;

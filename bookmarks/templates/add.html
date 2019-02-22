@@ -7,6 +7,7 @@ Bookmarks - Welcome
 {% block content %}
 <h1>Add a new URL</h1>
 <form action="" method="post">
+  <!-- important!! (CSRF protection) -->
   {{ form.hidden_tag() }}
   <table>
     <tr>
