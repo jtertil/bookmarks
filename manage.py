@@ -1,7 +1,6 @@
 from bookmarks import app, db
+from bookmarks.models import User
 from flask_script import Manager, prompt_bool
-
-from models import User
 
 manager = Manager(app)
 
