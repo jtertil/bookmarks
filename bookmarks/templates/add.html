@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
 
 {% block title %}
 Bookmarks - Welcome
@@ -10,14 +11,8 @@ Bookmarks - Welcome
   <!-- important!! (CSRF protection) -->
   {{ form.hidden_tag() }}
   <table>
-    <tr>
-      <td>Please enter your URL here:</td>
-      <td>{{ form.url(size = 50) }}</td>
-    </tr>
-    <tr>
-      <td>Optional description:</td>
-      <td>{{ form.description(size = 50) }}</td>
-    </tr>
+    {{ render_field(form.url, size=50) }}
+    {{ render_field(form.description, size=50) }}
     <tr>
       <td></td>
       <td><button type="submit">Submit</button></td>
