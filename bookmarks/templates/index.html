@@ -12,15 +12,13 @@ Bookmarks - Add
     </header>
     <section>
       <h2>Recently Added</h2>
-        <ul>
-          {% for bm in new_bookmarks %}
-            <li>
-              <a href="{{ url_for('user', username=bm.user.username) }}">{{ bm.user.username }}</a> added <a href="{{ bm.url }}">{{ bm.description }}</a>
-            </li>
-          {% else %}
+      {% if new_bookmarks.count() > 0 %}
+          {% with bookmarks=new_bookmarks %}
+            {% include "bookmark_list.html" %}
+          {% endwith %}
+        {% else %}
           No bookmarks yet.
-          {% endfor %}
-      </ul>
+        {% endif %}
     </section>
   </article>
 {% endblock %}

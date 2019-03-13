@@ -21,3 +21,6 @@ login_manager.init_app(app)
 
 import bookmarks.models
 import bookmarks.views
+
+from flask_moment import Moment
+moment = Moment(app)

@@ -8,16 +8,15 @@ Bookmarks - User {{ user.username }}
 <article>
   <header>
     <h1>Bookmarks - User {{ user.username }}</h1>
-    <ul>
-      {% for bm in user.bookmarks %}
-      <li>
-        <a href="{{ bm.url }}">{{ bm.description }}</a>
-        <span class="timestamp">Addad at {{ bm.date }}</span>
-      </li>
-      {% else %}
-      <li>No bookmarks yet</li>
-      {% endfor %}
-    </ul>
+
+    {% if user.bookmarks.count() > 0 %}
+      {% with bookmarks=user.bookmarks %}
+        {% include "bookmark_list.html" %}
+      {% endwith %}
+    {% else %}
+      This user has not added any bookmarks yet/
+    {% endif %}
+    
   </header>
 </article>
 {% endblock %}

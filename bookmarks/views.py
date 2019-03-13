@@ -30,7 +30,7 @@ def add():
         db.session.commit()
         flash("Stored '{}'".format(description))
         return redirect(url_for('index'))
-    return render_template('add.html', form=form)
+    return render_template('bookmark_form.html', form=form, title="Add a bookmark")
 
 @app.route('/user/<username>')
 def user(username):
@@ -49,6 +49,20 @@ def login():
         flash('Incorrect username or password.')
     print("login2")
     return render_template('login.html', form=form)
+
+@app.route('/edit/<int:bookmark_id>', methods=['GET', 'POST'])
+@login_required
+def edit_bookmark(bookmark_id):
+    bookmark = Bookmark.query.get_or_404(bookmark_id)
+    if current_user != bookmark.user:
+        return render_template('403.html')
+    form = BookmarkForm(obj=bookmark)
+    if form.validate_on_submit():
+        form.populate_obj(bookmark)
+        db.session.commit()
+        flash("Stored '{}'".format(bookmark.description))
+        return redirect(url_for('user', username=current_user.username))
+    return render_template('bookmark_form.html', form=form, title="Edit bookmark")
 
 @app.route('/logout')
 def logout():
