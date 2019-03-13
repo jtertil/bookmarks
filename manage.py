@@ -1,8 +1,12 @@
 from bookmarks import app, db
-from bookmarks.models import User
+from bookmarks.models import User, Bookmark
 from flask_script import Manager, prompt_bool
+from flask_migrate import Migrate, MigrateCommand
 
 manager = Manager(app)
+migrate = Migrate(app, db)
+
+manager.add_command('db', MigrateCommand)
 
 @manager.command
 def initdb():
