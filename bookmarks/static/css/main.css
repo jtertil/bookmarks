@@ -80,7 +80,7 @@ ul.bookmarks {
   padding-left: 0;
 }
 
-ul.bookmarks li {
+.bookmark {
   padding-bottom: .5em;
   border-top: 1px solid #7EA6BF;
   padding: 1em 0;
@@ -104,6 +104,7 @@ div.info {
 span.editlinks {
   float: right;
 }
+
 
 /* ===================
     ALL: Orange Theme

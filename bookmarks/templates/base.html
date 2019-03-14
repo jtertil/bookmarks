@@ -8,8 +8,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+      {% block styles %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.min.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+      {% endblock %}
 
         <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
@@ -52,8 +54,10 @@
 
               {% block sidebar %}
                 <aside>
-                  <h3>aside</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, tempore. Temporibus amet ut laudantium! Ea.</p>
+                  <h3>Tags</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet.
+                  <p>
                 </aside>
               {% endblock %}
             </div> <!-- #main -->
@@ -67,6 +71,9 @@
 
         {{ moment.include_jquery() }}
         {{ moment.include_moment() }}
+
+        {% block scripts %}
+        {% endblock %}
 
     </body>
 </html>
