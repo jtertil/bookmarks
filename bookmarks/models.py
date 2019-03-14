@@ -15,11 +15,22 @@ class Bookmark(db.Model):
     date = db.Column(db.DateTime, default=datetime.utcnow)
     description = db.Column(db.String(300))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # tags=["python"]
     _tags = db.relationship('Tag', secondary=tags, backref=db.backref('bookmarks', lazy='dynamic'))
 
     @staticmethod
     def newest(num):
         return Bookmark.query.order_by(desc(Bookmark.date)).limit(num)
+
+    @property
+    def tags(self):
+        return ",".join([t.name for t in self._tags])
+
+
+    @tags.setter
+    def tags(self, string):
+        if string:
+            self._tags = [Tag.get_or_create(name) for name in string.split(',')]
 
     def __repr__(self):
         return "Bookmark '{}: '{}".format(self.description, self.url)
@@ -53,6 +64,17 @@ class User(db.Model, UserMixin):
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(25), nullable=False, unique=True, index=True)
+
+    @staticmethod
+    def get_or_create(name):
+        try:
+            return Tag.query.filter_by(name=name).one()
+        except Exception as e:
+            return Tag(name=name)
+
+    @staticmethod
+    def all():
+        return Tag.query.all()
 
     def __repr__(self):
         return self.name

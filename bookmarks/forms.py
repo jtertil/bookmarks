@@ -7,6 +7,7 @@ class BookmarkForm(FlaskForm):
     url = URLField('url', validators=[DataRequired(), url()])
     # url = StringField('url')
     description = StringField('description')
+    tags = StringField('Tags', validators=[Regexp(r'^[A-Za-z0-9, ]*$', message="Tags can only contain letters and numbers")])
 
     def validate (self):
         if self.url.data.startswith("http://") == False and self.url.data.startswith("https://") == False :
@@ -14,6 +15,15 @@ class BookmarkForm(FlaskForm):
 
         if not FlaskForm.validate(self):
             return False
+
+        if not self.description.data:
+            self.description.data = self.url.data
+
+        #fliter for empty and duplicate tags
+        stripped = [t.strip() for t in self.tags.data.split(',')]
+        not_empty = [tag for tag in stripped if tag]
+        tagset = set(not_empty)
+        self.tags.data = ",".join(tagset)
 
         return True
 

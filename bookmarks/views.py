@@ -4,7 +4,7 @@ from flask_login import login_required, login_user, logout_user, current_user
 
 from bookmarks import app, db, login_manager
 from bookmarks.forms import BookmarkForm, LoginForm, SignupForm
-from bookmarks.models import User, Bookmark
+from bookmarks.models import User, Bookmark, Tag
 
 @login_manager.user_loader
 def load_user(userid):
@@ -21,11 +21,9 @@ def add():
     form = BookmarkForm()
     if form.validate_on_submit():
         url = form.url.data
-        if form.description.data == "":
-            description = url
-        else:
-            description = form.description.data
-        bm = Bookmark(user=current_user, url=url, description=description)
+        description = form.description.data
+        tags = form.tags.data
+        bm = Bookmark(user=current_user, url=url, description=description, tags=tags)
         db.session.add(bm)
         db.session.commit()
         flash("Stored '{}'".format(description))
