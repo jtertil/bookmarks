@@ -56,7 +56,11 @@
                 <aside>
                   <h3>Tags</h3>
                   <p>
-                    Lorem ipsum dolor sit amet.
+                    {% if all_tags %}
+                      alltags!
+                    {% else %}
+                      notags!
+                    {% endif %}
                   <p>
                 </aside>
               {% endblock %}
