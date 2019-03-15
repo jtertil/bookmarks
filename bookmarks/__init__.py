@@ -10,6 +10,7 @@ app.config['DEBUG'] = True
 from flask_sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'bookmarks.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['DEBUG'] = True
 db = SQLAlchemy(app)
 
 # authentication config
@@ -24,3 +25,6 @@ import bookmarks.views
 
 from flask_moment import Moment
 moment = Moment(app)
+
+from flask_debugtoolbar import DebugToolbarExtension
+toolbar = DebugToolbarExtension(app)
